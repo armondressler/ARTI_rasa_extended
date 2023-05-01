@@ -1,0 +1,29 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Do social engineering quiz
+  steps:
+  - intent: infosec_social_engineering
+  - action: utter_infosec_category_infosec_social_engineering_question_1
+
+- rule: Do phishing quiz
+  steps:
+  - intent: infosec_phishing
+  - action: utter_infosec_category_infosec_phishing_question_1
+
+- rule: Do dlp quiz
+  steps:
+  - intent: infosec_data_loss_prevention
+  - action: utter_infosec_category_infosec_data_loss_prevention_question_1
+

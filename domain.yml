@@ -1,0 +1,112 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - do_infosec_quiz
+  - infosec_phishing
+  - infosec_social_engineering
+  - infosec_data_loss_prevention
+  - social_engineering_question_1_answer_1
+  - social_engineering_question_1_answer_2
+  - social_engineering_question_1_answer_3
+  - phishing_question_1_answer_1
+  - phishing_question_1_answer_2
+  - phishing_question_1_answer_3
+  - data_loss_prevention_question_1_answer_1
+  - data_loss_prevention_question_1_answer_2
+  - data_loss_prevention_question_1_answer_3
+  - utter_infosec_correct
+  - utter_infosec_wrong
+
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+
+  utter_goodbye:
+  - text: "Bye"
+
+  utter_iamabot:
+  - text: "I am a bot, powered by Rasa."
+
+  utter_infosec_category_choice:
+  - text: "What category would you like to be quizzed on?"
+    buttons:
+    - title: "Social Engineering"
+      payload: "/infosec_social_engineering"
+    - title: "Phishing"
+      payload: "/infosec_phishing"
+    - title: "Data Loss Prevention"
+      payload: "/infosec_data_loss_prevention"
+  
+  utter_infosec_category_infosec_social_engineering_question_1:
+  - text: "Which of these attack methods does not rely on social engineering?"
+    buttons:
+    - title: "Spear Phishing"
+      payload: "/social_engineering_question_1_answer_1"
+    - title: "Pretexting"
+      payload: "/social_engineering_question_1_answer_2"
+    - title: "Cross Site Scripting"
+      payload: "/social_engineering_question_1_answer_3"
+
+  utter_infosec_category_infosec_phishing_question_1:
+  - text: "Which of these answers best describes an application of the spear phishing method?"
+    buttons:
+    - title: "Surveilance of a site of interest by using small, remote controlled drones ('spears')"
+      payload: "/phishing_question_1_answer_1"
+    - title: "The attacker will perform detailed research on the target to create a message that appears to come from someone the target knows and trusts"
+      payload: "/phishing_question_1_answer_2"
+    - title: "Searching for unprotected wifi networks using a high gain antenna"
+      payload: "/phishing_question_1_answer_3"
+
+  utter_infosec_category_infosec_data_loss_prevention_question_1:
+  - text: "What are challenges to implementing an effective DLP strategy?"
+    buttons:
+    - title: "The cost of implementing DLP solutions and the complexity of configuring them"
+      payload: "/data_loss_prevention_question_1_answer_1"
+    - title: "The lack of clear policies and procedures for identifying and handling sensitive data"
+      payload: "/data_loss_prevention_question_1_answer_2"
+    - title: "Both of the above"
+      payload: "/data_loss_prevention_question_1_answer_3"
+
+  utter_infosec_correct:
+  - text: "That is correct, is there anything else you would like to know on the topic?"
+
+  utter_infosec_wrong:
+  - text: "That is not the correct answer, maybe you should brush up a bit on the topic. What would you like to know?"
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+actions:
+ - action_query_chatgpt
+
+slots:
+  query:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: from_text
+      intent: None
+
+forms:
+  infosec_follow_up_form:
+    required_slots:
+        - query

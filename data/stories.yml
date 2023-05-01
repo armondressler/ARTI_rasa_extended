@@ -1,0 +1,66 @@
+version: "3.1"
+
+stories:
+
+- story: happy path
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_great
+  - action: utter_happy
+
+- story: sad path 1
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+
+- story: sad path 2
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: mood_unhappy
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_goodbye
+
+- story: infosec_school
+  steps:
+  - intent: do_infosec_quiz
+  - action: utter_infosec_category_choice
+
+- story: Wrong answer
+  steps:
+  - or:
+    - intent: social_engineering_question_1_answer_1
+    - intent: social_engineering_question_1_answer_2
+    - intent: phishing_question_1_answer_1
+    - intent: phishing_question_1_answer_3
+    - intent: data_loss_prevention_question_1_answer_1
+    - intent: data_loss_prevention_question_1_answer_2
+  - action: utter_infosec_wrong
+
+- story: Correct answer
+  steps:
+  - or:
+    - intent: social_engineering_question_1_answer_3
+    - intent: phishing_question_1_answer_2
+    - intent: data_loss_prevention_question_1_answer_3
+  - action: utter_infosec_correct
+  - intent: affirm
+  - action: infosec_follow_up_form
+  - active_loop: infosec_follow_up_form  
+
+
+
+# - story: infosec_school_open_question
+#   steps:
+#   - or:
+#     - intent: utter_infosec_correct
+#     - intent: utter_infosec_wrong
+#   - action: action_query_chatgpt
