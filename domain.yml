@@ -23,6 +23,7 @@ intents:
   - data_loss_prevention_question_1_answer_3
   - utter_infosec_correct
   - utter_infosec_wrong
+  - generic_query
 
 
 responses:
@@ -96,7 +97,7 @@ session_config:
   carry_over_slots_to_new_session: true
 
 actions:
- - action_query_chatgpt
+ - infosec_follow_up
 
 slots:
   query:
@@ -105,8 +106,3 @@ slots:
     mappings:
     - type: from_text
       intent: None
-
-forms:
-  infosec_follow_up_form:
-    required_slots:
-        - query

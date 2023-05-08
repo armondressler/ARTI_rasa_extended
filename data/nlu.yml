@@ -96,3 +96,9 @@ nlu:
     - i would like to do my infosec quiz
     - do the infosec quiz
     - quiz me on infosec
+
+- intent: generic_query
+  examples: |
+    - how do i?
+    - what is the?
+    - what are the?

@@ -52,15 +52,7 @@ stories:
     - intent: phishing_question_1_answer_2
     - intent: data_loss_prevention_question_1_answer_3
   - action: utter_infosec_correct
-  - intent: affirm
-  - action: infosec_follow_up_form
-  - active_loop: infosec_follow_up_form  
-
-
-
-# - story: infosec_school_open_question
-#   steps:
-#   - or:
-#     - intent: utter_infosec_correct
-#     - intent: utter_infosec_wrong
-#   - action: action_query_chatgpt
+  - intent: generic_query
+  - action: infosec_follow_up
+  - slot_was_set:
+    - query: "This is some text i want to capture"
