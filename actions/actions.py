@@ -20,16 +20,23 @@ class InfosecQuiz(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
         question = tracker.latest_message['text']
-        answer = self.askgpt(question=question)
-        dispatcher.utter_message(text=f"You asked me: {tracker.latest_message['text']} and the answer is: {answer}")
-
+        if len(question) < 10:
+            dispatcher.utter_message(text=f"Your request could not be processed, please provide more details.")
+            return []
+        question = f"{question} Please answer in 200 words or less."
+        try:
+            answer = self.askgpt(question=question)
+        except openai.error.RateLimitError as err:
+            answer = f"I asked ChatGPT for hints but it told me you haven't paid your bills :( ({err})"
+        dispatcher.utter_message(text=f"(Forwarded to openAI): {answer}")
         return []
+        
     
     def askgpt(self, question, chat_log=None):
         if chat_log is None:
             chat_log = [{
                 'role': 'system',
-                'content': 'You are an it security expert',
+                'content': 'You are an it security expert.',
             }]
         chat_log.append({'role': 'user', 'content': question})
         response = completion.create(model='gpt-3.5-turbo', messages=chat_log)

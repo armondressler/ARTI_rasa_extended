@@ -44,6 +44,10 @@ stories:
     - intent: data_loss_prevention_question_1_answer_1
     - intent: data_loss_prevention_question_1_answer_2
   - action: utter_infosec_wrong
+  - intent: generic_query
+  - action: infosec_follow_up
+  - slot_was_set:
+    - query: "This is some text i want to capture"
 
 - story: Correct answer
   steps:
